@@ -4,11 +4,11 @@ const port = 4000
 var bodyParser = require('body-parser')
 
 
-var MongoClient = require('../Client/node_modules/mongodb').MongoClient;
+var MongoClient = require('mongodb').MongoClient;
 const url ="mongodb+srv://empipower6:Emrek1221@cluster0-sxlzg.mongodb.net/test?retryWrites=true&w=majority";
 
 app.use(bodyParser.json());
-var cors = require('../Client/node_modules/cors');
+var cors = require('cors');
 app.use(cors());
 
 

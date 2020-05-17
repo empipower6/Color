@@ -28,7 +28,7 @@ class Color extends React.Component {
 
   async lock(){
 
-    const result = await fetch(`http://localhost:4000/ps`);
+    const result = await fetch(`/ps`);
     const data = await result.json();
 
     setTimeout(()=>{
@@ -46,7 +46,7 @@ class Color extends React.Component {
 
         }
 
-           fetch(`http://localhost:4000/updateColor`,{
+           fetch(`/updateColor`,{
               method:'POST',
               headers: {
              'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ class Color extends React.Component {
 
     }
 
-       fetch(`http://localhost:4000/deletecolor`,{
+       fetch(`/deletecolor`,{
           method:'POST',
           mode: 'cors',
           headers: {

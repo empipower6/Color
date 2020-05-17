@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 4000
+port = process.env.PORT || 80
 var bodyParser = require('body-parser')
 
 
@@ -88,4 +88,4 @@ app.get('/ps', async (req, res) => {
     })
     });
 });
-app.listen(port,()=>{console.log("Listening on port 4000")});
+app.listen(port,()=>{console.log("Listening on port"+port)});

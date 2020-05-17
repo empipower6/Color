@@ -1,0 +1,138 @@
+
+body{
+  cursor:default;
+}
+
+
+.biggerPicture{
+ overflow-x:hidden;
+ width:100%;
+ display:grid;
+ grid-template: 100%;
+
+}
+
+
+.each-color-composition{
+
+  display:grid;
+  grid-template-columns: 50% 50%;
+  padding-bottom:0.2vw;
+
+}
+
+
+
+.left-compose{
+
+
+  height:100vh;
+
+
+}
+.right-compose{
+
+
+  height:100vh;
+
+
+}
+
+
+.pickcolor{
+  position:fixed;
+  display:grid;
+  grid-template-columns: auto auto auto;
+  left:20%;
+  bottom:5%;
+  color:black;
+}
+
+.firstlabel,.secondlabel{
+
+
+  font-size:3vw;
+  padding-right:4vw;
+}
+
+
+
+.firstlabel-input,.secondlabel-input{
+
+   background-color: Transparent;
+   border:none;
+   border-bottom:0.1vw solid black;
+   font-size:3vw;
+   width:13vw;
+
+
+}
+
+.firstlabel-input:focus,.secondlabel-input:focus{
+  outline:none;
+}
+.button{
+    border:0.1vw solid grey;
+    background-color: Transparent;
+    font-size:3vw;
+    cursor:pointer;
+
+
+    transition:all 1s;
+    margin-left:5vw;
+}
+.button:hover{
+  background-color:white;
+}
+.button:focus{
+  outline:none;
+}
+
+.close{
+  cursor:pointer;
+  position:absolute;
+  right:5%;
+  margin-top:1vw;
+  font-size:5vw;
+
+}
+.lock{
+  cursor:pointer;
+  position:absolute;
+  right:20%;
+  margin-top:2vw;
+  font-size:3vw;
+}
+
+.arrows{
+
+   position:fixed;
+   right:5%;
+   top:30%;
+   font-size:10vw;
+
+}
+.arrows .up,.arrows .down{
+
+  cursor:pointer;
+  display:grid;
+  grid-template-columns: auto auto;
+
+}
+.first,.last{
+  position:absolute;
+  height:2vw;
+  width:2vw;
+
+}
+.first{
+  top:0;
+  right:0;
+  border:1vw solid black;
+}
+.last{
+  bottom:0;
+  border:1vw solid black;
+
+
+}

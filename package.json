@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "cd color/ && npm install && npm run build"
+    "build": "cd client/ && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

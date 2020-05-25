@@ -85,7 +85,7 @@ body{
     font-size:3vw;
     cursor:pointer;
     transition:all 1s;
-    margin-left:1vw;
+    margin-left:5vw;
 
     -webkit-box-shadow: -2px 0px 37px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: -2px 0px 37px -10px rgba(0,0,0,0.57);

@@ -13,8 +13,12 @@ class App extends React.Component {
      this.colorAdded = this.colorAdded.bind(this);
      this.arrayModified = this.arrayModified.bind(this);
      this.updateArray = this.updateArray.bind(this);
+     this.validColor = this.validColor.bind(this);
      this.firstinput= createRef();
      this.secondinput =createRef();
+
+
+     this.verifiedColors =[];
 }
 
   async updateArray(){
@@ -27,9 +31,9 @@ class App extends React.Component {
   }
   arrayModified(data){
     let maxKey=0;
-  data.map(({key,color1,color2,lock})=>{
-     (key>maxKey)? maxKey=key : maxKey=maxKey;
-     this.colors.push({key:key,first:color1,second:color2,lock:lock});//********
+  data.map(({key,keyColor,color1,color2,lock})=>{
+     (keyColor>maxKey)? maxKey=keyColor : maxKey=maxKey;
+     this.colors.push({key:key,keyColor:key,first:color1,second:color2,lock:lock});//********
   });
     maxKey+=1;
     this.setState({key:maxKey});
@@ -39,30 +43,63 @@ class App extends React.Component {
   componentDidMount(){
 
     this.updateArray();
-    if(process.env.NODE_ENV === 'production') {
-     console.log("It's production");
-      } else {
-        console.log("It's development");
-     }
 
+     this.verifiedColors.push("antiquewhite","aqua","aquamarine","azure",
+"beige","bisque","black","blanchedalmond","blue","blueviolet","brown","burlywood","cadetblue","chartreuse","chocolate","coral",
+"cornflowerblue","cornsilk","crimson","cyan","darkblue","darkcyan","darkgoldenrod","darkgray","darkgreen","darkgrey","darkkhaki",
+"darkmagenta","darkolivegreen","darkorange","darkorchid","darkred","darksalmon","darkseagreen","darkslateblue","darkslategray","darkslategrey",
+"darkturquoise","darkviolet","deeppink","deepskyblue","dimgray","dimgrey","dodgerblue","firebrick","floralwhite","forestgreen",
+"fuchsia","gainsboro","ghostwhite","gold","goldenrod","gray","green","greenyellow","grey","honeydew","hotpink","indianred","indigo",
+"ivory","khaki","lavender","lavenderblush","lawngreen","lemonchiffon","lightblue","lightcoral","lightcyan","lightgoldenrodyellow","lightgray",
+"lightgreen","lightgrey","lightpink","lightsalmon","lightseagreen","lightskyblue","lightslategray","lightslategrey","lightsteelblue","lightyellow","lime",
+"limegreen","linen","magenta","maroon","mediumaquamarine","mediumblue","mediumorchid","mediumpurple","mediumseagreen",
+"mediumslateblue","mediumspringgreen","mediumturquoise","mediumvioletred","midnightblue","mintcream","mistyrose","moccasin",
+"navajowhite","navy","oldlace","olive","olivedrab","orange","orangered","orchid","palegoldenrod","palegreen","paleturquoise",
+"palevioletred","papayawhip","peachpuff","peru","pink","plum",
+"powderblue","purple","rebeccapurple","red","rosybrown","royalblue","saddlebrown","salmon","sandybrown","seagreen","seashell",
+"sienna","silver","skyblue","slateblue","slategray","slategrey","snow","springgreen","steelblue","tan","teal","thistle","tomato",
+"turquoise","violet","wheat","white","whitesmoke","yellow","yellowgreen",
+)
 
 }
 
   colorChange(e){
 
+
         this.setState({[e.target.name]:e.target.value});
 
   }
+  validColor(col){
+
+
+    for(let i=0;i<this.verifiedColors.length;i++){
+        if(col== this.verifiedColors[i]){
+           return true;
+        }
+    }
+    return false;
+  }
+
 
  async colorAdded(e){
+   if(this.validColor(this.state.col1)&& this.validColor(this.state.col2)){
+
+//Capitalize the non # colors
+   if(this.state.col1[0] !== "#"){
+     this.state.col1 =this.state.col1[0].toUpperCase()+this.state.col1.slice(1);
+   }if(this.state.col2[0]!=="#"){
+     this.state.col2 =this.state.col2[0].toUpperCase()+this.state.col2.slice(1);
+   }
 
    let colorJson= {
     "key":this.state.key,
+    "keyColor":this.state.key,
    	"color1" :this.state.col1,//******
    	"color2" :this.state.col2,
     "lock" :false
 
    }
+
 
    this.setState({key:this.state.key+1});
 
@@ -73,25 +110,37 @@ class App extends React.Component {
     },
          body: JSON.stringify(colorJson)})
 
-    setTimeout(()=>{console.log("Done");this.updateArray()}, 100);
-    this.firstinput.value="";
-    this.secondinput.value="";
+    setTimeout(()=>{this.updateArray()}, 100);
 
 
+  }
+  else{
+    alert("One of the colors doesnt exist, maybe you can try using HEX codes");
+  }
+  this.setState({[this.firstinput.name]:""});
+  this.setState({[this.secondinput.name]:""});
+  this.firstinput.value="";
+  this.secondinput.value="";
   }
 
   render(){
      return(
 
        <div className="biggerPicture">
-
+       <h1 className="welcome-header"> Emre's Colors </h1>
+       <p className="welcome-text"> Welcome to my color palette! I created this website to have a space to put the color combinations I like in everyday life. I hope you enjoy it! Feel free to try it, but please delete the colors you create!! Have a good one :) </p>
        <div className="pickcolor">
-       <label className="firstlabel"> First: <input className="firstlabel-input" ref={el => this.firstinput = el} name="col1" type="text" onChange={this.colorChange}  /> </label>
-       <label className="secondlabel"> Second: <input className="secondlabel-input" ref={el => this.secondinput = el} type="reset" name="col2" type="text"  onChange={this.colorChange}  /> </label>
+       <label className="firstlabel"> First: <input className="firstlabel-input" ref={el => this.firstinput = el} name="col1" type="text" onChange={this.colorChange}  />
+          <div className="firstbox"style={{backgroundColor:this.state.col1}}> </div>
+       </label>
+       <label className="secondlabel"> Second: <input className="secondlabel-input" ref={el => this.secondinput = el} type="reset" name="col2" type="text"  onChange={this.colorChange}  />
+       <div className="secondbox" style={{backgroundColor:this.state.col2}}> </div>
+
+        </label>
        <button className="button" onClick={this.colorAdded}>Add Color</button>
        </div>
-       {this.colors.map(({key,first,second,lock})=>(
-            <Color keyColor={key} color1={first} color2={second} lock={lock} update={this.updateArray} />
+       {this.colors.map(({key,first,second,lock,index})=>(
+            <Color key={key} keyColor={key} color1={first} color2={second} lock={lock} update={this.updateArray} />
         )
       )}
 

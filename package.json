@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-   "node": "12.x"
- },
+    "node": "12.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.5.7"
+    "mongodb": "^3.5.7",
+    "nodemon": "^2.0.4"
   },
   "scripts": {
     "start": "node server",

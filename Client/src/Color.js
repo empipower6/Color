@@ -40,6 +40,7 @@ class Color extends React.Component {
         this.setState({lock:!this.state.lock});
         let colorJson= {
           "key":this.props.keyColor,
+          "keyColor":this.props.keyColor,
           "color1" :this.props.color1,
           "color2" :this.props.color2,
           "lock":this.state.lock
@@ -69,6 +70,7 @@ class Color extends React.Component {
    if(!this.state.lock){
     let colorJson= {
       "key":this.props.keyColor,
+      "keyColor":this.props.keyColor,
       "color1" :this.props.color1,
       "color2" :this.props.color2,
       "lock":this.state.lock
@@ -82,7 +84,7 @@ class Color extends React.Component {
          'Content-Type': 'application/json'
      },
           body: JSON.stringify(colorJson)})
-        setTimeout(()=>{console.log("Done");this.props.update();}, 200);
+        setTimeout(()=>{this.props.update();}, 200);
   }
   else{
      alert("You can't delete the color without unlocking it!");
@@ -96,8 +98,10 @@ class Color extends React.Component {
          <div className="lock" onClick={this.lock} style={{color:this.state.color}}>{this.state.lock?"locked":"unlocked"}</div>
          <div className="close" onClick={this.closed} style={{color:this.state.color}}> X </div>
         <div className="left-compose" style={{backgroundColor:this.props.color1}}>
+         <h1 className="left-name" style={{color:this.props.color2}}>{this.props.color1}</h1>
         </div>
         <div className="right-compose" style={{backgroundColor:this.props.color2}}>
+        <h1 className="right-name" style={{color:this.props.color1}}>{this.props.color2}</h1>
         </div>
 
       </div>

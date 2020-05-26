@@ -2,7 +2,7 @@ import React,{ createRef } from 'react';
 import './App.css';
 import Color from './Color.js';
 import "./Color.css";
-import { TweenMax } from 'gsap/all';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class App extends React.Component {
 
 
     for(let i=0;i<this.verifiedColors.length;i++){
-        if(col== this.verifiedColors[i]){
+        if(col=== this.verifiedColors[i]){
            return true;
         }
     }
@@ -82,15 +82,20 @@ class App extends React.Component {
 
 
  async colorAdded(e){
-   if(this.validColor(this.state.col1)&& this.validColor(this.state.col2)){
+   let valid1 =false;
+   let valid2= false;
 
 //Capitalize the non # colors
    if(this.state.col1[0] !== "#"){
+     if(this.validColor(this.state.col1)){valid1=true;}
      this.state.col1 =this.state.col1[0].toUpperCase()+this.state.col1.slice(1);
    }if(this.state.col2[0]!=="#"){
+     if(this.validColor(this.state.col2)){valid2=true;}
      this.state.col2 =this.state.col2[0].toUpperCase()+this.state.col2.slice(1);
    }
-
+   if(this.state.col1[0] === "#"){valid1=true;}
+   if(this.state.col2[0] === "#"){valid2=true;}
+   if(valid1 && valid2){
    let colorJson= {
     "key":this.state.key,
     "keyColor":this.state.key,
@@ -114,8 +119,11 @@ class App extends React.Component {
 
 
   }
-  else{
-    alert("One of the colors doesnt exist, maybe you can try using HEX codes");
+  else if(!valid1){
+    alert(this.state.col1 +"  is not a valid color. Please try again :)");
+  }
+  else if(!valid2){
+    alert(this.state.col2 +"  is not a valid color. Please try again :)");
   }
   this.setState({[this.firstinput.name]:""});
   this.setState({[this.secondinput.name]:""});

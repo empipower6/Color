@@ -24,7 +24,7 @@ class App extends React.Component {
   async updateArray(){
 
     this.colors=[];
-    const result = await fetch(`http://localhost:80/color`);
+    const result = await fetch(`/color`);
     const data = await result.json();
     this.arrayModified(data);
     this.setState({render:true});
@@ -108,7 +108,7 @@ class App extends React.Component {
 
    this.setState({key:this.state.key+1});
 
-      fetch(`http://localhost:80/newcolor`,{
+      fetch(`/newcolor`,{
          method:'POST',
          headers: {
         'Content-Type': 'application/json'

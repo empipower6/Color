@@ -29,7 +29,7 @@ class Color extends React.Component {
 
   async lock(){
 
-    const result = await fetch(`http://localhost:80/ps`);
+    const result = await fetch(`/ps`);
     const data = await result.json();
 
     setTimeout(()=>{
@@ -49,7 +49,7 @@ class Color extends React.Component {
 
         }
 
-           fetch(`http://localhost:80/updateColor`,{
+           fetch(`/updateColor`,{
               method:'POST',
               headers: {
              'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ class Color extends React.Component {
 
     }
 
-       fetch(`http://localhost:80/deletecolor`,{
+       fetch(`/deletecolor`,{
           method:'POST',
           mode: 'cors',
           headers: {
@@ -97,7 +97,7 @@ class Color extends React.Component {
     return(
 
       <div className="each-color-composition" ref={div => this.animate = div} >
-         
+
          <div className="lock" onClick={this.lock} style={{color:this.state.color}}>{this.state.lock?"locked":"unlocked"}</div>
          <div className="close" onClick={this.closed} style={{color:this.state.color}}> X </div>
         <div className="left-compose" style={{backgroundColor:this.props.color1}}>
